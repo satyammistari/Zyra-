@@ -7,6 +7,8 @@ import { Particles } from "@/components/ui/particles"
 import { AI_Prompt } from "@/components/ui/animated-ai-input"
 import { NavBar } from "@/components/ui/tubelight-navbar"
 import { SearchResults } from "@/components/search-results"
+import { HeroPillSecond, BeamsBackgroundDemo, StackedCircularFooterDemo } from "@/components/demo"
+import IntegrationHero from "@/components/ui/integration-hero"
 
 // Mock product data for demonstration
 const mockProducts = [
@@ -118,14 +120,32 @@ export default function ProductSearchPage() {
         />
       </div>
 
+      {/* Beams Background - Above particles, behind content */}
+      <div className="absolute inset-0 -z-5">
+        <BeamsBackgroundDemo />
+      </div>
+
+      {/* Hero Pill - Below Nav */}
+      <div className="pt-20 pb-4">
+        <div className="flex justify-center">
+          <HeroPillSecond />
+        </div>
+      </div>
+
+      {/* Product Search Title */}
+      <div className="pb-8">
+        <div className="text-center">
+          <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-transparent dark:from-white dark:to-slate-900/10">
+            Product Search
+          </h1>
+        </div>
+      </div>
+
       {/* Main Content */}
-      <div className="flex flex-col items-center justify-center min-h-screen px-4">
+      <div className="flex flex-col items-center px-4">
         {!hasSearched ? (
           // Hero Section
           <div className="text-center mb-8 max-w-4xl">
-            <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-transparent dark:from-white dark:to-slate-900/10 mb-6">
-              Product Search
-            </h1>
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
               Find the best products across all e-commerce platforms with AI-powered recommendations
             </p>
@@ -148,40 +168,8 @@ export default function ProductSearchPage() {
             </div>
           </div>
         ) : (
-          // Search Results Header
+          // Search Results Content
           <div className="w-full max-w-6xl mb-8">
-            <div className="text-center mb-6">
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-transparent dark:from-white dark:to-slate-900/10 mb-4">
-                {Array.from({ length: 50 }).map((_, i) => {
-                  const randomLeft = Math.random() * 100;
-                  const randomTop = Math.random() * 100;
-                  const randomWidth = Math.random() * 4 + 1;
-                  const randomHeight = Math.random() * 4 + 1;
-                  const randomOpacity = Math.random() * 0.5 + 0.1;
-                  const randomDelay = Math.random() * 2;
-                  const randomDuration = Math.random() * 3 + 2;
-                  
-                  return (
-                    <div
-                      key={i}
-                      className="absolute animate-pulse"
-                      style={{
-                        left: `${randomLeft}%`,
-                        top: `${randomTop}%`,
-                        width: `${randomWidth}px`,
-                        height: `${randomHeight}px`,
-                        backgroundColor: 'currentColor',
-                        borderRadius: '50%',
-                        opacity: randomOpacity,
-                        animationDelay: `${randomDelay}s`,
-                        animationDuration: `${randomDuration}s`,
-                      }}
-                    />
-                  );
-                })}
-                Product Search
-              </h1>
-            </div>
           </div>
         )}
 
@@ -199,41 +187,14 @@ export default function ProductSearchPage() {
           />
         )}
 
-        {/* Features Section (only show when no search has been made) */}
+        {/* Integration Hero Section (only show when no search has been made) */}
         {!hasSearched && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mt-16">
-            <div className="text-center p-6 bg-white/5 dark:bg-black/5 backdrop-blur-sm rounded-xl border border-white/10">
-              <div className="text-4xl mb-4">🤖</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                AI-Powered Search
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Advanced AI understands your needs and finds the perfect products
-              </p>
-            </div>
-            
-            <div className="text-center p-6 bg-white/5 dark:bg-black/5 backdrop-blur-sm rounded-xl border border-white/10">
-              <div className="text-4xl mb-4">💰</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                Best Prices
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Compare prices across all major platforms to get the best deals
-              </p>
-            </div>
-            
-            <div className="text-center p-6 bg-white/5 dark:bg-black/5 backdrop-blur-sm rounded-xl border border-white/10">
-              <div className="text-4xl mb-4">⭐</div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                Smart Reviews
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Aggregated reviews and ratings to help you make informed decisions
-              </p>
-            </div>
-          </div>
+          <IntegrationHero />
         )}
       </div>
+
+      {/* Footer - Always visible */}
+      <StackedCircularFooterDemo />
     </main>
   )
 }
