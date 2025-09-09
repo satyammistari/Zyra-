@@ -158,6 +158,11 @@ export function AI_Prompt({ onSearch }: AI_PromptProps) {
 
     const handleSearch = () => {
         if (!value.trim()) return;
+        
+        // Navigate to search page with query
+        const searchUrl = `/search?q=${encodeURIComponent(value.trim())}`;
+        window.location.href = searchUrl;
+        
         onSearch?.(value);
         setValue("");
         adjustHeight(true);

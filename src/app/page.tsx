@@ -67,10 +67,6 @@ const mockProducts = [
 export default function ProductSearchPage() {
   const { theme } = useTheme()
   const [color, setColor] = useState("#ffffff")
-  const [searchQuery, setSearchQuery] = useState("")
-  const [searchResults, setSearchResults] = useState<any[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [hasSearched, setHasSearched] = useState(false)
 
   useEffect(() => {
     setColor(theme === "dark" ? "#ffffff" : "#000000")
@@ -83,26 +79,7 @@ export default function ProductSearchPage() {
     { name: 'Settings', url: '#settings', icon: Settings }
   ]
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query)
-    setIsLoading(true)
-    setHasSearched(true)
-    
-    // Simulate API call delay
-    setTimeout(() => {
-      // Filter mock products based on query (simple simulation)
-      const filtered = mockProducts.filter(product =>
-        product.name.toLowerCase().includes(query.toLowerCase()) ||
-        product.features?.some(feature => 
-          feature.toLowerCase().includes(query.toLowerCase())
-        )
-      )
-      
-      // If no specific matches, show all products as "related results"
-      setSearchResults(filtered.length > 0 ? filtered : mockProducts)
-      setIsLoading(false)
-    }, 2000)
-  }
+  // Search is now handled by AI_Prompt component which redirects to /search page
 
   return (
     <main className="min-h-screen bg-background relative overflow-hidden">
@@ -143,54 +120,37 @@ export default function ProductSearchPage() {
 
       {/* Main Content */}
       <div className="flex flex-col items-center px-4">
-        {!hasSearched ? (
-          // Hero Section
-          <div className="text-center mb-8 max-w-4xl">
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-              Find the best products across all e-commerce platforms with AI-powered recommendations
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
-                🛒 Amazon
-              </div>
-              <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
-                🛍️ eBay
-              </div>
-              <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
-                🏪 Walmart
-              </div>
-              <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
-                🔵 Best Buy
-              </div>
-              <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
-                🎯 Target
-              </div>
+        {/* Hero Section */}
+        <div className="text-center mb-8 max-w-4xl">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+            Find the best products across all e-commerce platforms with AI-powered recommendations
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
+              🛒 Flipkart
+            </div>
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
+              🛍️ Amazon
+            </div>
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
+              🏪 eBay
+            </div>
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
+              🔵 Walmart
+            </div>
+            <div className="bg-white/10 dark:bg-black/10 backdrop-blur-sm rounded-full px-4 py-2 text-sm">
+              🎯 Target
             </div>
           </div>
-        ) : (
-          // Search Results Content
-          <div className="w-full max-w-6xl mb-8">
-          </div>
-        )}
+        </div>
 
         {/* Search Input */}
         <div className="w-full flex justify-center mb-8">
-          <AI_Prompt onSearch={handleSearch} />
+          <AI_Prompt />
         </div>
 
-        {/* Search Results */}
-        {hasSearched && (
-          <SearchResults
-            products={searchResults}
-            isLoading={isLoading}
-            query={searchQuery}
-          />
-        )}
-
-        {/* Integration Hero Section (only show when no search has been made) */}
-        {!hasSearched && (
-          <IntegrationHero />
-        )}
+        {/* Integration Hero Section */}
+        <IntegrationHero />
       </div>
 
       {/* Footer - Always visible */}
