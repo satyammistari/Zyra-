@@ -152,6 +152,33 @@ export default function ProductSearchPage() {
           <div className="w-full max-w-6xl mb-8">
             <div className="text-center mb-6">
               <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-transparent dark:from-white dark:to-slate-900/10 mb-4">
+                {Array.from({ length: 50 }).map((_, i) => {
+                  const randomLeft = Math.random() * 100;
+                  const randomTop = Math.random() * 100;
+                  const randomWidth = Math.random() * 4 + 1;
+                  const randomHeight = Math.random() * 4 + 1;
+                  const randomOpacity = Math.random() * 0.5 + 0.1;
+                  const randomDelay = Math.random() * 2;
+                  const randomDuration = Math.random() * 3 + 2;
+                  
+                  return (
+                    <div
+                      key={i}
+                      className="absolute animate-pulse"
+                      style={{
+                        left: `${randomLeft}%`,
+                        top: `${randomTop}%`,
+                        width: `${randomWidth}px`,
+                        height: `${randomHeight}px`,
+                        backgroundColor: 'currentColor',
+                        borderRadius: '50%',
+                        opacity: randomOpacity,
+                        animationDelay: `${randomDelay}s`,
+                        animationDuration: `${randomDuration}s`,
+                      }}
+                    />
+                  );
+                })}
                 Product Search
               </h1>
             </div>
