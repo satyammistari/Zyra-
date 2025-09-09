@@ -1,0 +1,20 @@
+{
+  "json.validate.enable": true,
+  "json.schemaDownload.enable": false,
+  "typescript.preferences.includePackageJsonAutoImports": "off",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact", 
+    "typescript",
+    "typescriptreact"
+  ],
+  "files.associations": {
+    "*.json": "json"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["package.json"],
+      "url": "https://json.schemastore.org/package.json"
+    }
+  ]
+}
